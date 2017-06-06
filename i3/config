@@ -104,7 +104,7 @@ bindsym $mod+a focus parent
 set $workspace1 "1: &#xf268;"
 set $workspace2 "2: &#xf120;"
 set $workspace3 "3"
-set $workspace4 "4"
+set $workspace4 "4: &#xf03d;"
 set $workspace10 "10: &#xf1bc;"
 
 # Auto open workspaces to specific monitor
@@ -141,6 +141,7 @@ assign [class="Spotify"] $workspace10
 for_window [class="Spotify"] move to workspace $workspace10
 assign [class="Chromium"] $workspace1
 assign [class="Terminator"] $workspace2
+assign [class="mpv"] $workspace4
 
 # Move workspace to monitor left/right
 
