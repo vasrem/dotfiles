@@ -46,6 +46,8 @@ set smarttab
 
 "" Search
 set showmatch
+" Stop searching
+nnoremap <c-l> :noh<return><c-l>
 " case sensitive search
 set ignorecase
 set hlsearch
