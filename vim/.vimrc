@@ -1,6 +1,8 @@
 set nocompatible
 set showmode
 filetype off
+"" Pathogen
+execute pathogen#infect()
 
 "" Vundle
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -13,6 +15,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'myusuf3/numbers.vim'
+Plugin 'Valloric/YouCompleteMe'
 Plugin 'Chiel92/vim-autoformat'
 call vundle#end()
 
@@ -82,6 +85,7 @@ set updatetime=250
 "" Mac Preferences 
 syntax enable
 set background=dark
+set t_Co=256 
 let g:solarized_termcolors=256
 colorscheme solarized
 set titleold=
