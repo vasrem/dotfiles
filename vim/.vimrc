@@ -21,6 +21,7 @@ call vundle#end()
 
 filetype plugin indent on
 
+au FileType pug setl sw=2 sts=2 et
 "" Hide buffer
 set hidden
 
