@@ -15,8 +15,8 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'myusuf3/numbers.vim'
-Plugin 'Valloric/YouCompleteMe'
 Plugin 'Chiel92/vim-autoformat'
+Plugin 'digitaltoad/vim-pug'
 call vundle#end()
 
 filetype plugin indent on
@@ -91,6 +91,7 @@ let g:solarized_termcolors=256
 colorscheme solarized
 set titleold=
 set laststatus=2
+set lazyredraw
 let g:airline#extensions#whitespace#show_message=0
 let g:airline_powerline_fonts=1
 let g:airline_theme="wombat"
