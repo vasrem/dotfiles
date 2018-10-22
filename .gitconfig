@@ -11,3 +11,5 @@
 	cob = checkout -b
 	cm = !git add -A && git commit -m
 	undo = reset HEAD --hard
+[rebase]
+	autosquash = true

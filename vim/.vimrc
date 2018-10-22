@@ -17,6 +17,7 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'myusuf3/numbers.vim'
 Plugin 'Chiel92/vim-autoformat'
 Plugin 'digitaltoad/vim-pug'
+Plugin 'fatih/vim-go'
 call vundle#end()
 
 filetype plugin indent on
@@ -46,12 +47,13 @@ set copyindent
 " # of spaces to indent 
 set shiftwidth=4
 set shiftround
-set smarttab
+set expandtab
 
 "" Search
 set showmatch
 " Stop searching
 nnoremap <c-l> :noh<return><c-l>
+
 " case sensitive search
 set ignorecase
 set hlsearch
@@ -73,6 +75,10 @@ set noerrorbells
 "" No trashes
 set nobackup
 set noswapfile
+
+"" Folding
+set foldmethod=indent
+set foldlevel=20
 
 "" Open NERDTree on startup
 autocmd vimenter * NERDTree | wincmd p
@@ -98,6 +104,13 @@ let g:airline_theme="wombat"
 if !exists('g:airline_symbols')
 	let g:airline_symbols={}
 endif
+
+"" Display symbols
+set encoding=utf-8
+
+"" FormatJSON command
+com! FormatJSON %!python -m json.tool
+
 " unicode symbols
 let g:airline_left_sep = '»'
 let g:airline_left_sep = '▶'
