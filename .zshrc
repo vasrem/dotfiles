@@ -23,6 +23,8 @@ source $ZSH/oh-my-zsh.sh
 # Documentation container
 alias docu="docker run -d -p 8000:8000 --name docu -v $HOME/work/documentation:/docs squidfunk/mkdocs-material"
 alias docustart="docker start docu"
+# Public IP
+alias get_ip="curl ipinfo.io/ip"
 # Kubernetes
 alias k="kubectl"
 
