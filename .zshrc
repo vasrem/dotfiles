@@ -77,4 +77,5 @@ fi
 NODE=$(uname -n)
 [[ ! -d ~/.zsh_history.d ]] && mkdir ~/.zsh_history.d
 export HISTFILE=~/.zsh_history.d/$NODE
+export HISTSIZE=999999999
 # END
