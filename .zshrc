@@ -79,3 +79,21 @@ NODE=$(uname -n)
 export HISTFILE=~/.zsh_history.d/$NODE
 export HISTSIZE=999999999
 # END
+
+# START ~ find pods, running containers, all containers per node
+k_stats_per_node(){
+    if [[ -z $1 ]]; then
+        echo "ERROR: Node not specified as first argument"
+        return
+    fi
+    local node=${1}
+    kubectl get pods --all-namespaces -o wide | grep $node | awk 'BEGIN {allc = 0; runningc = 0; pods = 0} {gsub(/\//," "); allc = allc + $4; runningc = runningc + $3; pods = NR} END{print "All pods: ", pods, "\nAll containers: ", allc, "\nRunning containers: ", runningc}'
+}
+# END
+
+# START ~ find pods, running containers, all containers per namespace
+k_stats_per_namespace(){
+    local namespace=${1-"default"}
+    kubectl get pods -n $namespace -o wide | tail -n +2 | awk 'BEGIN {allc = 0; runningc = 0; pods = 0} {gsub(/\//," "); allc = allc + $3; runningc = runningc + $2; pods = NR} END{print "All pods: ", pods, "\nAll containers: ", allc, "\nRunning containers: ", runningc}'
+}
+# END
