@@ -1,26 +1,22 @@
 set nocompatible
 set showmode
-filetype off
 "" Pathogen
 execute pathogen#infect()
 
-"" Vundle
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'The-NERD-Commenter'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'scrooloose/nerdtree'
-Plugin 'Xuyuanp/nerdtree-git-plugin'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'myusuf3/numbers.vim'
-Plugin 'Chiel92/vim-autoformat'
-Plugin 'digitaltoad/vim-pug'
-Plugin 'fatih/vim-go'
-call vundle#end()
+"" vim-plug
+call plug#begin('~/.config/nvim/plugged')
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install all' }
+Plug 'junegunn/fzf.vim'
+Plug 'scrooloose/nerdcommenter'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'airblade/vim-gitgutter'
+Plug 'myusuf3/numbers.vim'
+Plug 'Chiel92/vim-autoformat'
 
-filetype plugin indent on
+call plug#end()
 
 au FileType pug setl sw=2 sts=2 et
 "" Hide buffer
@@ -91,7 +87,7 @@ set foldmethod=indent
 set foldlevel=20
 
 "" Open NERDTree on startup
-autocmd vimenter * NERDTree | wincmd p
+"autocmd vimenter * NERDTree | wincmd p
 
 "dont show lines in nerdtree
 let g:numbers_exclude = ['nerdtree']
@@ -103,8 +99,7 @@ set updatetime=250
 syntax enable
 set background=dark
 set t_Co=256 
-let g:solarized_termcolors=256
-colorscheme solarized
+colorscheme kuroi
 set titleold=
 set laststatus=2
 set lazyredraw

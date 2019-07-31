@@ -7,21 +7,22 @@
 
 # i3 config file (v4)
 #
-# Please see http://i3wm.org/docs/userguide.html for a complete reference!
+# Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
 set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:System San Francisco Display 12
+font pango:monospace 8
 
-#colors
-
+# colors
 set $bg-color				#2f343f
 set $inactive-bg-color		#2f343f
 set $text-color				#f3f4f5
 set $inactive-text-color	#676E7D
 set $urgent-bg-color		#E53935
+set $preview-colour		#2f343f
+
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 #font pango:DejaVu Sans Mono 8
@@ -37,14 +38,13 @@ set $urgent-bg-color		#E53935
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+t exec i3-sensible-terminal
+bindsym $mod+Return exec i3-sensible-terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-#bindsym $mod+d exec dmenu_run
-bindsym $mod+Return exec rofi -show run -lines 4 -width 40 -padding 10 -font "System San Francisco Display 18"
+bindsym $mod+d exec dmenu_run
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
@@ -100,55 +100,29 @@ bindsym $mod+a focus parent
 # focus the child container
 #bindsym $mod+d focus child
 
-# Workspace names
-set $workspace1 "1: &#xf268;"
-set $workspace2 "2: &#xf120;"
-set $workspace3 "3"
-set $workspace4 "4: &#xf03d;"
-set $workspace9 "9: &#xf0e6;"
-set $workspace10 "10: &#xf1bc;"
-
-# Auto open workspaces to specific monitor
-workspace $workspace1 output DVI-I-0
-workspace $workspace2 output DVI-I-0
-workspace $workspace10 output DVI-I-1
-
 # switch to workspace
-bindsym $mod+1 workspace $workspace1
-bindsym $mod+2 workspace $workspace2
-bindsym $mod+3 workspace $workspace3
-bindsym $mod+4 workspace $workspace4
-bindsym $mod+5 workspace 5
-bindsym $mod+6 workspace 6
-bindsym $mod+7 workspace 7
-bindsym $mod+8 workspace 8
-bindsym $mod+9 workspace $workspace9
-bindsym $mod+0 workspace $workspace10
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
+bindsym $mod+6 workspace number 6
+bindsym $mod+7 workspace number 7
+bindsym $mod+8 workspace number 8
+bindsym $mod+9 workspace number 9
+bindsym $mod+0 workspace number 10
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace $workspace1 
-bindsym $mod+Shift+2 move container to workspace $workspace2
-bindsym $mod+Shift+3 move container to workspace $workspace3
-bindsym $mod+Shift+4 move container to workspace $workspace4
-bindsym $mod+Shift+5 move container to workspace 5
-bindsym $mod+Shift+6 move container to workspace 6
-bindsym $mod+Shift+7 move container to workspace 7
-bindsym $mod+Shift+8 move container to workspace 8
-bindsym $mod+Shift+9 move container to workspace $workspace9
-bindsym $mod+Shift+0 move container to workspace $workspace10
-
-# Auto open apps on specific workspaces
-assign [class="Spotify"] $workspace10
-for_window [class="Spotify"] move to workspace $workspace10
-assign [class="Chromium"] $workspace1
-assign [class="Terminator"] $workspace2
-assign [class="mpv"] $workspace4
-assign [class="TeamSpeak 3"] $workspace9
-
-# Move workspace to monitor left/right
-
-bindsym $mod+Shift+greater move workspace to output DVI-I-1
-bindsym $mod+Shift+less move workspace to output DVI-I-0
+bindsym $mod+Shift+1 move container to workspace number 1
+bindsym $mod+Shift+2 move container to workspace number 2
+bindsym $mod+Shift+3 move container to workspace number 3
+bindsym $mod+Shift+4 move container to workspace number 4
+bindsym $mod+Shift+5 move container to workspace number 5
+bindsym $mod+Shift+6 move container to workspace number 6
+bindsym $mod+Shift+7 move container to workspace number 7
+bindsym $mod+Shift+8 move container to workspace number 8
+bindsym $mod+Shift+9 move container to workspace number 9
+bindsym $mod+Shift+0 move container to workspace number 10
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -156,7 +130,6 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
-
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -183,23 +156,19 @@ mode "resize" {
 }
 
 bindsym $mod+r mode "resize"
-
-
-
-#window colors
-#						border				background			text					indicator
-client.focused			$bg-color			$bg-color			$text-color				#00ff00
-client.unfocused		$inactive-bg-color	$inactive-bg-color	$inactive-text-color	#00ff00
-client.focused_inactive	$inactive-bg-color	$inactive-bg-color	$inactive-text-color	#00ff00
-client.urgent			$urgent-bg-color	$urgent-bg-color	$text-color				#00ff00
-
-hide_edge_borders both
-
+bindsym $mod+Shift+x exec i3lock --color=000000 -f
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
+
+# window colors
+#						border				background			text					indicator
+client.focused			$bg-color			$bg-color			$text-color		$preview-color	
+client.unfocused		$inactive-bg-color	$inactive-bg-color	$inactive-text-color	$preview-color	
+client.focused_inactive	$inactive-bg-color	$inactive-bg-color	$inactive-text-color	$preview-color	
+client.urgent			$urgent-bg-color	$urgent-bg-color	$text-color	$preview-color	
+
 bar {
-        status_command i3blocks -c ~/.config/i3/i3blocks.conf 
-		tray_output primary
+        status_command i3status
         colors{
 			background $bg-color
 			separator #757575
@@ -211,14 +180,3 @@ bar {
 
         }
 }
-
-# Desktop Background
-exec_always feh --bg-scale /home/vasrem/Documents/Pictures/arch.jpg
-
-# Dropbox daemon
-exec --no-startup-id dropbox start
-# Transparent rofi
-exec compton
-# keyboard languages
-exec "setxkbmap -layout us,gr"
-exec "setxkbmap -option 'grp:alt_shift_toggle'"
