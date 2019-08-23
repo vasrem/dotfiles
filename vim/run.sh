@@ -3,6 +3,8 @@ set -euo pipefail
 
 path=$(cd "$(pwd)/$(dirname $0)" && pwd)
 
+source $path/../lib.sh
+
 mkdir -p $HOME/.config
 mkdir -p $HOME/.config/nvim
 mkdir -p $HOME/.config/nvim/autoload
@@ -10,7 +12,7 @@ mkdir -p $HOME/.config/nvim/bundle
 mkdir -p $HOME/.config/nvim/colors
 mkdir -p $HOME/.config/nvim/plugged
 
-[[ -f "$HOME/.config/nvim/init.vim" || -L "$HOME/.config/nvim/init.vim" ]] && mv $HOME/.config/nvim/init.vim $HOME/.config/nvim/init.vim.old
+backup ".config/nvim/init.vim"
 
 ln -s $path/vimrc $HOME/.config/nvim/init.vim
 [[ ! -f "$HOME/.config/nvim/colors/kuroi.vim" && ! -L "$HOME/.config/nvim/colors/kuroi.vim" ]] && ln -s $path/colors/kuroi.vim $HOME/.config/nvim/colors/ || true

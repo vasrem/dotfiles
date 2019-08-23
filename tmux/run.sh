@@ -2,6 +2,8 @@
 set -euo pipefail
 
 path=$(cd "$(pwd)/$(dirname $0)" && pwd)
+
+source $path/../lib.sh
  
 mkdir -p $HOME/.tmux
 mkdir -p $HOME/.tmux/plugins
@@ -9,7 +11,6 @@ mkdir -p $HOME/.tmux/plugins
 rm -rf $HOME/.tmux/plugins/tpm
 git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
 
-[[ -f "$HOME/.tmux.conf" || -L "$HOME/.tmux.conf" ]] && mv $HOME/.tmux.conf $HOME/.tmux.conf.old
-[[ -f "$HOME/.tmux.conf" || -L "$HOME/.tmux.conf" ]] && mv $HOME/.tmux.conf $HOME/.tmux.conf.old
+backup ".tmux.conf"
 
 ln -s $path/tmux.conf $HOME/.tmux.conf
