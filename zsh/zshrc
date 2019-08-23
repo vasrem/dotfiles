@@ -14,7 +14,7 @@ plugins=(
 # Go 
 export GOPATH=$HOME/go
 [[ ! -d ~/.scripts ]] && mkdir ~/.scripts
-export PATH=$PATH:~/.scripts:$GOPATH/bin
+export PATH=$PATH:~/.scripts:$GOPATH/bin:/snap/bin
 
 # Source oh-my-zsh before the custom functions
 source $ZSH/oh-my-zsh.sh

@@ -37,15 +37,16 @@
 
 !! URxvt Appearance
 URxvt*.termName: rxvt-unicode-256color
-URxvt.font: xft:Dejavu Sans Mono:size=11
-URxvt.boldFont: xft:Dejavu Sans Mono:size=11
-URxvt.italicFont: xft:Dejavu Sans Mono:size=11
-URxvt.boldItalicFont: xft:Dejavu Sans Mono:size=11
+URxvt.font: xft:Dejavu Sans Mono:size=14
+URxvt.boldFont: xft:Dejavu Sans Mono:size=14
+URxvt.italicFont: xft:Dejavu Sans Mono:size=14
+URxvt.boldItalicFont: xft:Dejavu Sans Mono:size=14
 URxvt.letterSpace: 0
 URxvt.lineSpace: 0
 URxvt.scrollBar: false
 URxvt.scrollBar_right: false
 URxvt.urgentOnBell: false
+URxvt*internalBorder: 0
 
 
 URxvt.keysym.Control-Up:   \033[1;5A
@@ -56,3 +57,5 @@ URxvt.keysym.Control-Right:    \033[1;5C
 URxvt.iso14755: false
 URxvt.keysym.Shift-Control-V: eval:paste_clipboard
 URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
+
+URxvt.perl-ext-common: ...,font-size
