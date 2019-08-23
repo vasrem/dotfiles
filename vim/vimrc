@@ -13,9 +13,10 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'airblade/vim-gitgutter'
+Plug 'airblade/vim-rooter'
 Plug 'myusuf3/numbers.vim'
 Plug 'Chiel92/vim-autoformat'
-
+Plug 'w0rp/ale'
 call plug#end()
 
 au FileType pug setl sw=2 sts=2 et
@@ -115,6 +116,19 @@ set encoding=utf-8
 
 "" FormatJSON command
 com! FormatJSON %!python -m json.tool
+
+"" Set list chars
+set listchars=tab:>\ ,trail:-,nbsp:+,eol:$
+
+"" Ale config
+nmap <F8> <Plug>(ale_fix)
+let b:ale_fixers = {
+            \'go': ['gofmt'],
+            \'rust': ['rustfmt']
+            \}
+
+"" fzf config
+map <C-p> :Files<CR>
 
 " unicode symbols
 let g:airline_left_sep = '»'
