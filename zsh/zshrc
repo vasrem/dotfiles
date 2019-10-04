@@ -9,6 +9,7 @@ plugins=(
   git
   kubectl
   docker
+  aws
 )
 
 # Go 
@@ -28,6 +29,10 @@ alias docustart="docker start docu"
 alias get_ip="curl ipinfo.io/ip"
 # Kubernetes
 alias k="kubectl"
+# Pbcopy aliases for linux
+alias pbcopy='xclip -selection clipboard'
+alias pbpaste='xclip -selection clipboard -o'
+unalias '...'
 
 ## Custom Functions
 # START ~ set/get k8s namespace
