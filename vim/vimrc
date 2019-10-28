@@ -17,6 +17,8 @@ Plug 'airblade/vim-rooter'
 Plug 'myusuf3/numbers.vim'
 Plug 'Chiel92/vim-autoformat'
 Plug 'w0rp/ale'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 call plug#end()
 
 au FileType pug setl sw=2 sts=2 et
@@ -90,6 +92,10 @@ set foldlevel=20
 "" Open NERDTree on startup
 "autocmd vimenter * NERDTree | wincmd p
 
+"" Open NERDTree using shortcut
+nmap <F6> :NERDTreeToggle<CR>
+
+
 "dont show lines in nerdtree
 let g:numbers_exclude = ['nerdtree']
 
@@ -127,8 +133,18 @@ let b:ale_fixers = {
             \'rust': ['rustfmt']
             \}
 
+let g:ale_linters = {
+	\'go': ['gopls']
+	\}
+
 "" fzf config
 map <C-p> :Files<CR>
+
+"" go autocomplete
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'
+" let coc do the gd
+let g:go_def_mapping_enabled = 0
 
 " unicode symbols
 let g:airline_left_sep = '»'
@@ -144,3 +160,40 @@ let g:airline_symbols.paste = 'ρ'
 let g:airline_symbols.paste = 'Þ'
 let g:airline_symbols.paste = '∥'
 let g:airline_symbols.whitespace = ''
+
+"" Coc setup
+" Better display for messages
+set cmdheight=2
+" Smaller updatetime for CursorHold & CursorHoldI
+set updatetime=300
+" don't give |ins-completion-menu| messages.
+set shortmess+=c
+" always show signcolumns
+set signcolumn=yes
+
+" Use tab for trigger completion with characters ahead and navigate.
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Show all diagnostics
+nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+" Find symbol of current document
+nnoremap <silent> <space>o  :<C-u>CocList outline<cr>

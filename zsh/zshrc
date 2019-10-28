@@ -18,6 +18,9 @@ export GOPATH=$HOME/go
 
 export PATH=$PATH:$HOME/.scripts:$GOPATH/bin:/snap/bin:$HOME/.cargo/bin
 
+# Ignore folders when using FZF
+export FZF_DEFAULT_COMMAND='fdfind -E vendor'
+
 # Source oh-my-zsh before the custom functions
 source $ZSH/oh-my-zsh.sh
 
