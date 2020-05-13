@@ -40,6 +40,9 @@ set backspace=indent,eol,start
 "" fix copy paste
 set clipboard=unnamed
 
+"" Move cursor with mouse
+set mouse=a
+
 "" Undofile
 if !isdirectory($HOME."/.vim")
     call mkdir($HOME."/.vim", "", 0770)
