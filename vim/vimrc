@@ -130,12 +130,17 @@ set listchars=tab:>\ ,trail:-,nbsp:+,eol:$
 nmap <F8> <Plug>(ale_fix)
 let b:ale_fixers = {
             \'go': ['gofmt'],
-            \'rust': ['rustfmt']
+            \'rust': ['rustfmt'],
+            \'python': ['autopep8']
             \}
 
 let g:ale_linters = {
-	\'go': ['gopls']
+	\'go': ['gopls'],
+	\'python': ['pylint', 'flake8']
 	\}
+
+"" autopep8 options
+let g:ale_python_autopep8_options = "--max-line-length=120"
 
 "" fzf config
 map <C-p> :Files<CR>
