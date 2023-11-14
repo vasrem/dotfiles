@@ -99,6 +99,9 @@ set foldlevel=20
 "" Open NERDTree on startup
 "autocmd vimenter * NERDTree | wincmd p
 
+"" Hide specific files in NerdTree
+let NERDTreeIgnore=['__pycache__']
+
 "" Open NERDTree using shortcut
 nmap <F6> :NERDTreeToggle<CR>
 
@@ -138,16 +141,21 @@ nmap <F8> <Plug>(ale_fix)
 let b:ale_fixers = {
             \'go': ['gofmt'],
             \'rust': ['rustfmt'],
-            \'python': ['autopep8']
+            \'python': ['yapf', 'isort'],
+            \'javascript': ['prettier', 'eslint']
             \}
 
 let g:ale_linters = {
 	\'go': ['gopls'],
-	\'python': ['pylint', 'flake8']
+	\'python': ['mypy', 'pydocstyle'],
+    \'javascript': ['eslint']
 	\}
 
 "" autopep8 options
 let g:ale_python_autopep8_options = "--max-line-length=120"
+let g:ale_python_yapf_options = "--config ~/dotfiles/vim/setup.cfg"
+let g:ale_python_mypy_options = "--config ~/dotfiles/vim/setup.cfg"
+let g:ale_python_pydocstyle_options = "--config ~/dotfiles/vim/setup.cfg"
 
 "" fzf config
 map <C-p> :Files<CR>
@@ -192,7 +200,8 @@ inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 function! s:check_back_space() abort
   let col = col('.') - 1

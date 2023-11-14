@@ -1,4 +1,5 @@
 {
+  "pyright.inlayHints.variableTypes": false,
   "languageserver": {
     "golang": {
       "command": "gopls",

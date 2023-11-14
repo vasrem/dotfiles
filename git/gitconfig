@@ -4,6 +4,7 @@
 	email = vasremm@gmail.com
 [core]
 	editor = /usr/bin/vim
+	autocrlf = false
 [log]
 	decorate = full
 [alias]
