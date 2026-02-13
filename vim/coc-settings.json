@@ -1,10 +1,37 @@
 {
-  "pyright.inlayHints.variableTypes": false,
-  "languageserver": {
-    "golang": {
-      "command": "gopls",
-      "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
-      "filetypes": ["go"]
+    "pyright.inlayHints.variableTypes": false,
+    "markdownlint.config": {
+      "line_length": {
+        "line_length": 120
+      }
+    },
+    "languageserver": {
+        "golang": {
+            "command": "gopls",
+            "rootPatterns": [
+                "go.mod",
+                ".vim/",
+                ".git/",
+                ".hg/"
+            ],
+            "filetypes": [
+                "go"
+            ]
+        },
+        "coc-clangd": {
+            "command": "clangd",
+            "filetypes": [
+                "c",
+                "cc",
+                "cpp",
+                "c++",
+                "objc",
+                "objcpp"
+            ],
+            "rootPatterns": [
+                "compile_commands.json",
+                ".git/"
+            ]
+        }
     }
-  }
 }

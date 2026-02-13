@@ -108,7 +108,16 @@ k_stats_per_namespace(){
 
 # START ~ run netshoot
 k_netshoot(){
-    kubectl run --generator=run-pod/v1 tmp-shell --rm -i --tty --image nicolaka/netshoot --overrides='{ "apiVersion": "v1", "nodeSelector": { "kubernetes.io/hostname": "ip-172-21-117-156.eu-central-1.compute.internal" } }' -- /bin/bash
+    # kubectl run --generator=run-pod/v1 tmp-shell --rm -i --tty --image nicolaka/netshoot --overrides='{ "apiVersion": "v1", "nodeSelector": { "kubernetes.io/hostname": "ip-172-21-117-156.eu-central-1.compute.internal" } }' -- /bin/bash
+    kubectl run vremmas-$(date +%s) --rm -i --tty --image nicolaka/netshoot  -- /bin/bash
+}
+
+k_netshoot_hostnetwork(){
+    kubectl run vremmas-$(date +%s) --rm -i --tty --image nicolaka/netshoot --overrides='{ "apiVersion": "v1", "spec": { "hostNetwork": true } }'  -- /bin/bash
+}
+
+k_netshoot_tolerateall(){
+    kubectl run vremmas-$(date +%s) --rm -i --tty --image nicolaka/netshoot --overrides='{ "apiVersion": "v1", "spec": { "tolerations": [ {"operator": "Exists"} ] } }'  -- /bin/bash
 }
 # END
 
@@ -117,3 +126,9 @@ reset_scrolling(){
     sudo modprobe -r psmouse
     sudo modprobe psmouse
 }
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

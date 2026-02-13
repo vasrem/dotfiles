@@ -18,8 +18,10 @@ Plug 'myusuf3/numbers.vim'
 Plug 'Chiel92/vim-autoformat'
 Plug 'w0rp/ale'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
+Plug 'tpope/vim-fugitive'
+Plug 'coder/claudecode.nvim'
 call plug#end()
 
 "" Required to get rid of message
@@ -78,6 +80,9 @@ set incsearch
 "" Remember many previous commands 
 set history=1000
 
+"" Be able to open big files
+set maxmempattern=5000
+
 "" Undo 1000 times
 set undolevels=1000
 
@@ -105,7 +110,6 @@ let NERDTreeIgnore=['__pycache__']
 "" Open NERDTree using shortcut
 nmap <F6> :NERDTreeToggle<CR>
 
-
 "dont show lines in nerdtree
 let g:numbers_exclude = ['nerdtree']
 
@@ -126,6 +130,9 @@ let g:airline_theme="wombat"
 if !exists('g:airline_symbols')
 	let g:airline_symbols={}
 endif
+hi statusline cterm=NONE gui=NONE
+hi tabline cterm=NONE gui=NONE
+hi winbar cterm=NONE gui=NONE
 
 "" Display symbols
 set encoding=utf-8
@@ -221,3 +228,40 @@ nmap <silent> gr <Plug>(coc-references)
 nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
 " Find symbol of current document
 nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+
+"" Claude
+lua << EOF
+  require('claudecode').setup({
+    terminal = {
+      provider = "native",
+    },
+  })
+EOF
+
+" Toggle Claude
+nnoremap <leader>ac :ClaudeCodeFocus<CR>
+" Resume previous session
+nnoremap <leader>ar :ClaudeCode --resume<CR>
+" Continue
+nnoremap <leader>aC :ClaudeCode --continue<CR>
+" Add current buffer
+nnoremap <leader>ab :ClaudeCodeAdd %<CR>
+" Send visual selection
+vnoremap <leader>as :ClaudeCodeSend<CR>
+" Diff accept / deny
+nnoremap <leader>aa :ClaudeCodeDiffAccept<CR>
+nnoremap <leader>ad :ClaudeCodeDiffDeny<CR>
+
+" Extra configuration for numbers and ESC
+augroup Claude
+  autocmd!
+  "" Special filetype for Claude
+  autocmd TermOpen * if @% =~# 'claude' | setlocal filetype=claude | endif
+  "" Number always off
+  " On terminal creation
+  autocmd TermOpen * if &filetype ==# 'claude' | setlocal nonumber norelativenumber | endif
+  " On entering any window: if it's a terminal, keep numbers off
+  autocmd BufEnter * if &filetype ==# 'claude' | setlocal nonumber norelativenumber | endif
+  "" Escape with ESC
+  autocmd TermOpen * if &filetype ==# 'claude' | tnoremap <buffer> <Esc> <C-\><C-n> | endif
+augroup END
